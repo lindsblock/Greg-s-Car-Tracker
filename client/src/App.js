@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Route, Switch } from 'react-router-dom';
+import Home from './components/Home';
+import Gas from './components/Gas';
+import Maintenance from './components/Maintenance';
+import Mods from './components/Mods';
+import Purchase from './components/Purchase';
+import TireRotation from './components/TireRotation';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/gas' component={Gas} />
+          <Route exact path='/maintenance' component={Maintenance} />
+          <Route exact path='/mods' component={Mods} />
+          <Route exact path='/purchase' component={Purchase} />
+          <Route exact path='/tires' component={TireRotation} />
+        </Switch>
       </div>
     );
   }
