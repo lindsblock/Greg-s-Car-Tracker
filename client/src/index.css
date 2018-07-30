@@ -3,3 +3,28 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.background {
+ background-image: url(https://images.pexels.com/photos/89693/pexels-photo-89693.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+ height: 100%;
+ background-position: center;
+ background-repeat: no-repeat;
+ background-size: cover;
+}
+
+.desktopSizeDiv{
+  display: flex !important;
+}
+
+.mobileSizeDiv{
+ display: none !important;
+}
+
+@media (max-width: 768px){
+  .mobileSizeDiv {
+    display: flex !important;
+  }
+  .desktopSizeDiv {
+    display: none !important;
+  }
+}

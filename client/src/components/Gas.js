@@ -1,9 +1,23 @@
 import React from 'react';
+import { Form } from 'semantic-ui-react';
 
 class Gas extends React.Component{
+  state={
+    location: ''
+  }
   render() {
     return(
-      <h1>Gas</h1>
+      <div>
+        <h1>Gas</h1>
+        <Form>
+          <Form.Input
+            name=""
+            required
+            
+            label="Location"
+          />
+        </Form>
+      </div>
     )
   }
 }

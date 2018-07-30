@@ -1,9 +1,12 @@
 import React from 'react';
+import { Header } from 'semantic-ui-react';
 
 class Home extends React.Component{
   render() {
     return(
-      <h1>GREG'S CAR APP</h1>
+      <div className="background" style={{padding: '300px', textAlign: "center"}}>
+        <Header style={{fontFamily:'Anton', color:'red', fontSize:'100px'}}>GREG'S CAR APP</Header>
+      </div>
     )
   }
 }
