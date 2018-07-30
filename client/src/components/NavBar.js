@@ -14,8 +14,8 @@ class NavBar extends React.Component{
             <Link to='/purchase'>
               <Menu.Item style={styles.navHeaders} name='purchase'>Purchase</Menu.Item>
             </Link>
-            <Link to='/gas'>
-              <Menu.Item style={styles.navHeaders} name='gas'>Gas</Menu.Item>
+            <Link to='/gasoline'>
+              <Menu.Item style={styles.navHeaders} name='gasoline'>Gasoline</Menu.Item>
             </Link>
             <Link to='/mods'>
               <Menu.Item style={styles.navHeaders} name='mods'>Mods</Menu.Item>
@@ -33,7 +33,7 @@ class NavBar extends React.Component{
             <Dropdown.Menu classname='menuTop'>
               <Menu.Item as='a' href='/'>Home</Menu.Item>
               <Menu.Item as='a' href='/purchase'>Purchase</Menu.Item>
-              <Menu.Item as='a' href='/gas'>Gas</Menu.Item>
+              <Menu.Item as='a' href='/gasoline'>Gasoline</Menu.Item>
               <Menu.Item as='a' href='/mods'>Mods</Menu.Item>
               <Menu.Item as='a' href='/maintenance'>Maintenance</Menu.Item>
               <Menu.Item as='a' href='/tires'>Tire Rotation</Menu.Item>
