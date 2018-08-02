@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180730180836) do
+ActiveRecord::Schema.define(version: 20180801155721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,28 @@ ActiveRecord::Schema.define(version: 20180730180836) do
     t.string "date"
     t.integer "miles_between"
     t.string "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "mods", force: :cascade do |t|
+    t.string "name"
+    t.string "date"
+    t.float "price"
+    t.integer "miles"
+    t.string "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tires", force: :cascade do |t|
+    t.string "name"
+    t.string "date"
+    t.integer "odometer"
+    t.string "type"
+    t.integer "total_miles"
+    t.string "tire"
+    t.string "miles"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -12,6 +12,10 @@ body {
  background-size: cover;
 }
 
+.backgroundTwo {
+  background-color: black;
+}
+
 .desktopSizeDiv{
   display: flex !important;
 }

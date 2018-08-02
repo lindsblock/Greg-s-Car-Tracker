@@ -2,10 +2,11 @@ class Api::GasolinesController < ApplicationController
   before_action :set_gasoline, only: [:update, :destroy]
 
   def index
-    render json: Gasoline.all
+    render json: Gasoline.all.order(created_at: :desc)
   end
 
   def show
+    render json: @gasoline
   end
 
   def create
@@ -21,7 +22,7 @@ class Api::GasolinesController < ApplicationController
     if @gasoline.update(gasoline_params)
       render json: @gasoline
     else
-      rener json: @gasoline.errors, status: 422
+      render json: { errors: @gasoline.errors.full_messages.join(',') }, status: 422
     end
   end
 
