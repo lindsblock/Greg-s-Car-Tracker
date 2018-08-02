@@ -4,27 +4,61 @@ import ModsForm from './ModsForm';
 import axios from 'axios';
 
 class Mods extends React.Component{
-  state= { showForm: false, mod: {} }
+  state = { showForm: false, mods: [] }
 
   componentDidMount = () => {
     axios.get('api/mods')
     .then(res => this.setState({ mods: res.data }) )
   }
 
-  toggleForm = () => {
-   this.setState( state => {
-     return { showForm: !state.showForm }
-   });
+ showForm = () => {
+    return <ModsForm submit={this.submit} />
+  }
+
+  show = () => {
+   const { mods } = this.state
+   return (
+     <ul>
+       { mods.map( m =>
+           <li key={m.id}>
+             <h1>{m.name}</h1>
+           </li>
+         )
+       }
+     </ul>
+   )
  }
+ form = () => {
+    return <ModsForm submit={this.submit} />
+  }
+  toggleForm = () => {
+    this.setState( state => {
+      return { showForm: !state.showForm }
+    })
+  }
+
+  submit = (mod) => {
+    const { mods } = this.state
+    axios.post('/api/mods', { mod })
+      .then( res => {
+        this.setState({
+          mods: [res.data, ...mods],
+          showForm: false
+        })
+      })
+  }
 
   render() {
     const { showForm } = this.state
     return(
       <div>
         <Header as="h1" style={styles.headers}>Mods</Header>
-          <Button color="red" style={styles.button} onClick={this.toggleForm}>Add Modification</Button>
-        {showForm ?  this.showForm() : <h1>test</h1> }
-
+        <Container textAlign="center">
+          <Button color="red" onClick={this.toggleForm}>
+           { showForm ? 'Cancel' : 'Add Modification' }
+         </Button>
+         { showForm ? this.form() : this.show() }
+       </Container>
       </div>
     )
   }
