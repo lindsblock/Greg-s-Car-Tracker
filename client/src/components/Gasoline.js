@@ -29,7 +29,7 @@ show = () => {
    <Table celled style={{fontFamily: 'Ubuntu', fontSize:'16px'}}>
      <Table.Header>
        <Table.Row>
-         <Table.HeaderCell>Location</Table.HeaderCell>
+         <Table.HeaderCell children>Location</Table.HeaderCell>
          <Table.HeaderCell>Octane</Table.HeaderCell>
          <Table.HeaderCell>Gallons</Table.HeaderCell>
          <Table.HeaderCell>Miles</Table.HeaderCell>
@@ -40,27 +40,23 @@ show = () => {
          <Table.HeaderCell>Notes</Table.HeaderCell>
        </Table.Row>
      </Table.Header>
-     <Table.Body>
+     { gasolines.map( g =>
+     <Table.Body >
        <Table.Row>
-         { gasolines.map( g =>
-           <Table.HeaderCell key={g.id}>{g.location} </Table.HeaderCell>
-         )}
-       </Table.Row>
-     <Table.Row>
-         { gasolines.map( g =>
-           <Table.HeaderCell key={g.id}>{g.octane} </Table.HeaderCell>
-         )}
+           <Table.Cell key={g.id}>{g.location}</Table.Cell>
+           <Table.Cell key={g.id}>{g.octane}</Table.Cell>
+           <Table.Cell key={g.id}>{g.gallons}</Table.Cell>
+           <Table.Cell key={g.id}>{g.miles}</Table.Cell>
+           <Table.Cell key={g.id}>{g.mpg}</Table.Cell>
+           <Table.Cell key={g.id}>{g.price}</Table.Cell>
+           <Table.Cell key={g.id}>{g.date}</Table.Cell>
+           <Table.Cell key={g.id}>{g.miles_between}</Table.Cell>
+           <Table.Cell key={g.id}>{g.notes}</Table.Cell>
        </Table.Row>
      </Table.Body>
+   )}
    </Table>
-   <ul>
-     { gasolines.map( g =>
-         <li key={g.id}>
-           <h1>{g.location}</h1>
-         </li>
-       )
-     }
-   </ul>
+   <Divider hidden />
  </div>
  )
 }
