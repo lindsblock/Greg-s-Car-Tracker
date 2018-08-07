@@ -2,7 +2,7 @@ class Api::GasolinesController < ApplicationController
   before_action :set_gasoline, only: [:update, :destroy]
 
   def index
-    render json: Gasoline.all.order(created_at: :desc)
+    render json: Gasoline.all.order(created_at: :asc)
   end
 
   def show

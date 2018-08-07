@@ -1,8 +1,8 @@
 class Api::TiresController < ApplicationController
-  before_action :set_tire, only [:update, :destroy]
+  before_action :set_tire, only: [:update, :destroy]
 
   def index
-    render json: Tire.all.order(created_at: :desc)
+    render json: Tire.all.order(created_at: :asc)
   end
 
   def show
@@ -15,6 +15,7 @@ class Api::TiresController < ApplicationController
       render json: tire
     else
       render json: {errors: tire.errors.full_messages.join(','), status: 422}
+    end
   end
 
   def update
@@ -22,6 +23,7 @@ class Api::TiresController < ApplicationController
       render json: @tire
     else
       render json: { errors: @tire.errors.full_messages.join(',') }, status: 422
+    end
   end
 
   def destroy

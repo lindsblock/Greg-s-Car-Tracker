@@ -18,14 +18,27 @@ class Mods extends React.Component{
   show = () => {
    const { mods } = this.state
    return (
-     <ul>
-       { mods.map( m =>
-           <li key={m.id}>
-             <h1>{m.name}</h1>
-           </li>
-         )
-       }
-     </ul>
+     <div>
+       <Table celled style={{fontFamily: 'Ubuntu', fontSize:'16px'}}>
+         <Table.Header>
+           <Table.Row>
+             <Table.HeaderCell>Modification</Table.HeaderCell>
+             <Table.HeaderCell>Install Date</Table.HeaderCell>
+             <Table.HeaderCell>Price</Table.HeaderCell>
+             <Table.HeaderCell>Miles</Table.HeaderCell>
+             <Table.HeaderCell>Notes</Table.HeaderCell>
+           </Table.Row>
+         </Table.Header>
+       </Table>
+       <ul>
+         { mods.map( m =>
+             <li key={m.id}>
+               <h1>{m.name}</h1>
+             </li>
+           )
+         }
+       </ul>
+     </div>
    )
  }
  form = () => {
@@ -57,6 +70,7 @@ class Mods extends React.Component{
           <Button color="red" onClick={this.toggleForm}>
            { showForm ? 'Cancel' : 'Add Modification' }
          </Button>
+         <Divider hidden />
          { showForm ? this.form() : this.show() }
        </Container>
       </div>

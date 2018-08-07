@@ -1,15 +1,17 @@
 import React from 'react';
 import { Form, Button, Container } from 'semantic-ui-react';
 
-class ModsForm extends React.Component {
-  state ={
-    mods: [{
+class TireForm extends React.Component {
+  state = {
+    tires: [{
       name: '',
       date: '',
-      price: '',
+      odometer: '',
+      type: '',
+      total_miles: '',
+      tire: '',
       miles: '',
-      notes: '',
-    }],
+    }]
   }
 
   componentDidMount() {
@@ -19,8 +21,8 @@ class ModsForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    let mod = { ...this.state }
-    this.props.submit(mod)
+    let tire = { ...this.state }
+    this.props.submit(tire)
     this.setState({ ...this.state })
   }
 
@@ -30,7 +32,7 @@ class ModsForm extends React.Component {
   }
 
   render() {
-    const { name, date, price, miles, notes} = this.state
+    const { name, date, odometer, type, total_miles, tire, miles } = this.state
     return(
       <div>
         <Container textAlign="center">
@@ -49,9 +51,27 @@ class ModsForm extends React.Component {
                 onChange={this.handleChange}
               />
               <Form.Input
-                name="price"
-                value={price}
-                label="Price"
+                name="odometer"
+                value={odometer}
+                label="Odometer"
+                onChange={this.handleChange}
+              />
+              <Form.Input
+                name="type"
+                value={type}
+                label="Type"
+                onChange={this.handleChange}
+              />
+              <Form.Input
+                name="total_miles"
+                value={total_miles}
+                label="Total Miles"
+                onChange={this.handleChange}
+              />
+              <Form.Input
+                name="tire"
+                value={tire}
+                label="Tire"
                 onChange={this.handleChange}
               />
               <Form.Input
@@ -61,12 +81,6 @@ class ModsForm extends React.Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
-            <Form.TextArea
-              name="notes"
-              value={notes}
-              label="Notes"
-              onChange={this.handleChange}
-            />
             <Button color="red" style={styles.button}>Submit</Button>
           </Form>
         </Container>
@@ -74,7 +88,6 @@ class ModsForm extends React.Component {
     )
   }
 }
-
 const styles= {
   headers: {
     fontFamily: 'Anton',
@@ -89,5 +102,4 @@ const styles= {
   }
 }
 
-
-export default ModsForm;
+export default TireForm;

@@ -22,14 +22,6 @@ class Gasoline extends React.Component{
     return <GasolineForm submit={this.submit} />
   }
 
-
-
-  toggleForm = () => {
-  this.setState( state => {
-    return { showForm: !state.showForm }
-  });
-}
-
 show = () => {
  const { gasolines } = this.state
  return (
@@ -48,6 +40,18 @@ show = () => {
          <Table.HeaderCell>Notes</Table.HeaderCell>
        </Table.Row>
      </Table.Header>
+     <Table.Body>
+       <Table.Row>
+         { gasolines.map( g =>
+           <Table.HeaderCell key={g.id}>{g.location} </Table.HeaderCell>
+         )}
+       </Table.Row>
+     <Table.Row>
+         { gasolines.map( g =>
+           <Table.HeaderCell key={g.id}>{g.octane} </Table.HeaderCell>
+         )}
+       </Table.Row>
+     </Table.Body>
    </Table>
    <ul>
      { gasolines.map( g =>
@@ -85,6 +89,7 @@ form = () => {
           <Button color="red" onClick={this.toggleForm}>
            { showForm ? 'Cancel' : 'Add Gasoline' }
          </Button>
+         <Divider hidden />
          { showForm ? this.form() : this.show() }
         </Container>
       </div>

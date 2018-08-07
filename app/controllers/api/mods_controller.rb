@@ -2,7 +2,7 @@ class Api::ModsController < ApplicationController
   before_action :set_mod, only: [:update, :destroy]
 
   def index
-    render json: Mod.all.order(created_at: :desc)
+    render json: Mod.all.order(created_at: :asc)
   end
 
   def show
@@ -15,6 +15,7 @@ class Api::ModsController < ApplicationController
       render json: mod
     else
       render json: { errors: mod.errors.full_messages.join(','), status: 422 }
+    end
   end
 
   def update
@@ -22,7 +23,7 @@ class Api::ModsController < ApplicationController
       render json: @mod
     else
       render json: { errors: mod.errors.full_messages.join(','), status: 422 }
-      end
+    end
   end
 
   def destroy
@@ -38,5 +39,5 @@ class Api::ModsController < ApplicationController
   def set_mod
     @mod = Mod.find(params[:id])
   end
-  
+
 end
