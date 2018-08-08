@@ -1,14 +1,17 @@
 import React from 'react';
 import { Form, Button, Container } from 'semantic-ui-react';
 
-class TireForm extends React.Component {
+class TireRotationForm extends React.Component {
   state = {
-    tires: [{
+    tire_rotations: [{
       name: '',
-      miles: '',
+      date: '',
+      odometer: '',
+      kind: '',
+      total_miles: '',
     }]
   }
-
+  
   componentDidMount() {
     if (this.props.id)
     this.setState({ ...this.props })
@@ -27,22 +30,40 @@ class TireForm extends React.Component {
   }
 
   render() {
-    const { name, miles } = this.state
+    const { name, date, odometer, kind, total_miles } = this.state
     return(
       <div>
         <Container textAlign="center">
           <Form onSubmit={this.handleSubmit} style={{fontFamily: 'Ubuntu', fontSize:'18px'}}>
             <Form.Group widths="equal">
               <Form.Input
-                name="name"
-                value={name}
-                label="Name"
+                name="date"
+                value={date}
+                label="Date"
                 onChange={this.handleChange}
               />
               <Form.Input
-                name="miles"
-                value={miles}
-                label="Miles"
+                name="odometer"
+                value={odometer}
+                label="Odometer"
+                onChange={this.handleChange}
+              />
+              <Form.Input
+                name="name"
+                value={name}
+                label="Tire Name"
+                onChange={this.handleChange}
+              />
+              <Form.Input
+                name="kind"
+                value={kind}
+                label="Tire Type"
+                onChange={this.handleChange}
+              />
+              <Form.Input
+                name="total_miles"
+                value={total_miles}
+                label="Total Miles"
                 onChange={this.handleChange}
               />
             </Form.Group>
@@ -67,4 +88,4 @@ const styles= {
   }
 }
 
-export default TireForm;
+export default TireRotationForm;

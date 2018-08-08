@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  namespace :api do
+    resources :tire_rotations
+  end
+
   namespace :api do
     resources :gasolines
   end
@@ -6,7 +11,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :tires
   end
-  
+
   namespace :api do
     resources :mods
   end

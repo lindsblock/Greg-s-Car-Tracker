@@ -1,22 +1,22 @@
 import React from 'react';
 import { Header, Table, Button, Divider, Container } from 'semantic-ui-react';
 import axios from 'axios';
-import TireForm from './TireForm';
+import TireRotationForm from './TireRotationForm';
 
 class TireRotation extends React.Component{
-  state = { tires: [], showForm: false }
+  state = { tire_rotations: [], showForm: false, tires:[] }
 
   componentDidMount = () => {
-    axios.get('api/tires')
-    .then(res => this.setState({ tires: res.data}))
+    axios.get('api/tire_rotations', 'api/tires')
+    .then(res => this.setState({ tire_rotations: res.data}))
   }
 
   showForm = () => {
-    return <TireForm submit={this.submit} />
+    return <TireRotationForm submit={this.submit} />
   }
 
   show = () => {
-   const { tires } = this.state
+   const { tire_rotations, tires } = this.state
    return (
      <div>
        <Table celled style={{fontFamily: 'Ubuntu', fontSize:'16px'}}>
@@ -30,14 +30,14 @@ class TireRotation extends React.Component{
              <Table.HeaderCell>Edit/Delete</Table.HeaderCell>
            </Table.Row>
          </Table.Header>
-         { tires.map( t =>
+         { tire_rotations.map( r =>
           <Table.Body>
             <Table.Row>
-              <Table.Cell key={t.id}>{t.date}</Table.Cell>
-              <Table.Cell key={t.id}>{t.odometer}</Table.Cell>
-              <Table.Cell key={t.id}>{t.name}</Table.Cell>
-              <Table.Cell key={t.id}>{t.kind}</Table.Cell>
-              <Table.Cell key={t.id}>{t.total_miles}</Table.Cell>
+              <Table.Cell key={r.id}>{r.date}</Table.Cell>
+              <Table.Cell key={r.id}>{r.odometer}</Table.Cell>
+              <Table.Cell key={r.id}>{r.name}</Table.Cell>
+              <Table.Cell key={r.id}>{r.kind}</Table.Cell>
+              <Table.Cell key={r.id}>{r.total_miles}</Table.Cell>
               <Table.Cell>
                 <Button circular icon="edit" size="small" onClick={this.edit}/>
                 <Button circular icon="delete" color="red" size="small"/>
@@ -46,6 +46,7 @@ class TireRotation extends React.Component{
           </Table.Body>
         )}
        </Table>
+       {/* THIS PART IS NOT WORKING YET */}
        <Header as="h1" style={styles.headers}>Tires</Header>
        <Button style={styles.button} color="red">Add New Tires</Button>
        <Table celled style={{fontFamily: 'Ubuntu', fontSize:'16px'}}>
@@ -59,7 +60,7 @@ class TireRotation extends React.Component{
          { tires.map( (t, i) =>
           <Table.Body>
             <Table.Row>
-              <Table.Cell key={t.id}>{t.tire}</Table.Cell>
+              <Table.Cell key={t.id}>{t.name}</Table.Cell>
               <Table.Cell key={t.id}>{t.miles}</Table.Cell>
               <Table.Cell>
                 <Button circular icon="edit" size="small" onClick={this.edit}/>
@@ -75,7 +76,7 @@ class TireRotation extends React.Component{
  }
 
  form = () => {
-    return <TireForm submit={this.submit} />
+    return <TireRotationForm submit={this.submit} />
   }
 
   toggleForm = () => {
@@ -84,12 +85,12 @@ class TireRotation extends React.Component{
     })
   }
 
-  submit = (tire) => {
-    const { tires } = this.state
-    axios.post('/api/tires', { tire })
+  submit = (tire_rotation) => {
+    const { tire_rotations } = this.state
+    axios.post('/api/tire_rotations', { tire_rotation })
       .then( res => {
         this.setState({
-          tires: [res.data, ...tires],
+          tire_rotations: [res.data, ...tire_rotations],
           showForm: false
         })
       })

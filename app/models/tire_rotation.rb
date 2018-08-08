@@ -1,0 +1,2 @@
+class TireRotation < ApplicationRecord
+end
