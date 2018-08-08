@@ -14,6 +14,7 @@ class TireRotation extends React.Component{
   showForm = () => {
     return <TireForm submit={this.submit} />
   }
+
   show = () => {
    const { tires } = this.state
    return (
@@ -26,17 +27,49 @@ class TireRotation extends React.Component{
              <Table.HeaderCell>Tire Name</Table.HeaderCell>
              <Table.HeaderCell>Tire Type</Table.HeaderCell>
              <Table.HeaderCell>Total Miles</Table.HeaderCell>
+             <Table.HeaderCell>Edit/Delete</Table.HeaderCell>
            </Table.Row>
          </Table.Header>
-       </Table>
-       <ul>
          { tires.map( t =>
-             <li key={t.id}>
-               <h1>{t.name}</h1>
-             </li>
-           )
-         }
-       </ul>
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell key={t.id}>{t.date}</Table.Cell>
+              <Table.Cell key={t.id}>{t.odometer}</Table.Cell>
+              <Table.Cell key={t.id}>{t.name}</Table.Cell>
+              <Table.Cell key={t.id}>{t.kind}</Table.Cell>
+              <Table.Cell key={t.id}>{t.total_miles}</Table.Cell>
+              <Table.Cell>
+                <Button circular icon="edit" size="small" onClick={this.edit}/>
+                <Button circular icon="delete" color="red" size="small"/>
+              </Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        )}
+       </Table>
+       <Header as="h1" style={styles.headers}>Tires</Header>
+       <Button style={styles.button} color="red">Add New Tires</Button>
+       <Table celled style={{fontFamily: 'Ubuntu', fontSize:'16px'}}>
+         <Table.Header>
+           <Table.Row>
+             <Table.HeaderCell>Tire Name</Table.HeaderCell>
+             <Table.HeaderCell>Miles</Table.HeaderCell>
+             <Table.HeaderCell>Edit/Delete</Table.HeaderCell>
+           </Table.Row>
+         </Table.Header>
+         { tires.map( (t, i) =>
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell key={t.id}>{t.tire}</Table.Cell>
+              <Table.Cell key={t.id}>{t.miles}</Table.Cell>
+              <Table.Cell>
+                <Button circular icon="edit" size="small" onClick={this.edit}/>
+                <Button circular icon="delete" color="red" size="small" onCLick={this.delete}/>
+              </Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        )}
+       </Table>
+       <Divider hidden />
      </div>
    )
  }
@@ -66,9 +99,9 @@ class TireRotation extends React.Component{
     const { showForm } = this.state;
     return(
       <div>
-        <Header as="h1" style={styles.headers}>Tires</Header>
+        <Header as="h1" style={styles.headers}>Tire Rotation</Header>
         <Container textAlign="center">
-          <Button color="red" onClick={this.toggleForm}>
+          <Button style={styles.button} color="red" onClick={this.toggleForm}>
            { showForm ? 'Cancel' : 'Add Tire Rotation' }
          </Button>
          <Divider hidden />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Divider, Grid, Image, Segment, Header } from 'semantic-ui-react';
+import { Table, Divider, Grid, Image } from 'semantic-ui-react';
 
 class Purchase extends React.Component{
   render() {

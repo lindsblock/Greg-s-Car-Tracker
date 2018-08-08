@@ -4,10 +4,10 @@ class CreateTires < ActiveRecord::Migration[5.1]
       t.string :name
       t.string :date
       t.integer :odometer
-      t.string :type
+      t.string :kind
       t.integer :total_miles
       t.string :tire
-      t.string :miles
+      t.integer :miles
 
       t.timestamps
     end

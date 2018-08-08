@@ -7,7 +7,7 @@ class TireForm extends React.Component {
       name: '',
       date: '',
       odometer: '',
-      type: '',
+      kind: '',
       total_miles: '',
       tire: '',
       miles: '',
@@ -32,18 +32,12 @@ class TireForm extends React.Component {
   }
 
   render() {
-    const { name, date, odometer, type, total_miles, tire, miles } = this.state
+    const { name, date, odometer, kind, total_miles, tire, miles } = this.state
     return(
       <div>
         <Container textAlign="center">
           <Form onSubmit={this.handleSubmit} style={{fontFamily: 'Ubuntu', fontSize:'18px'}}>
             <Form.Group widths="equal">
-              <Form.Input
-                name="name"
-                value={name}
-                label="Modification"
-                onChange={this.handleChange}
-              />
               <Form.Input
                 name="date"
                 value={date}
@@ -57,27 +51,21 @@ class TireForm extends React.Component {
                 onChange={this.handleChange}
               />
               <Form.Input
-                name="type"
-                value={type}
-                label="Type"
+                name="name"
+                value={name}
+                label="Tire Name"
+                onChange={this.handleChange}
+              />
+              <Form.Input
+                name="kind"
+                value={kind}
+                label="Tire Type"
                 onChange={this.handleChange}
               />
               <Form.Input
                 name="total_miles"
                 value={total_miles}
                 label="Total Miles"
-                onChange={this.handleChange}
-              />
-              <Form.Input
-                name="tire"
-                value={tire}
-                label="Tire"
-                onChange={this.handleChange}
-              />
-              <Form.Input
-                name="miles"
-                value={miles}
-                label="Miles"
                 onChange={this.handleChange}
               />
             </Form.Group>

@@ -30,7 +30,7 @@ class NavBar extends React.Component{
         </div>
         <div className='mobileSizeDiv'>
           <Dropdown icon='content' floating className='link item' style={{display: 'flex', justifyContent: 'center', fontSize: '24px', margin: '20px'}}>
-            <Dropdown.Menu classname='menuTop'>
+            <Dropdown.Menu className='menuTop'>
               <Menu.Item as='a' href='/'>Home</Menu.Item>
               <Menu.Item as='a' href='/purchase'>Purchase</Menu.Item>
               <Menu.Item as='a' href='/gasoline'>Gasoline</Menu.Item>

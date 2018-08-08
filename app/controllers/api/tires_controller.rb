@@ -33,7 +33,7 @@ class Api::TiresController < ApplicationController
   private
 
   def tire_params
-    params.require(:tire).permit(:name, :date, :odometer, :type, :total_miles, :tire, :miles)
+    params.require(:tire).permit(:name, :date, :odometer, :kind, :total_miles, :tire, :miles)
   end
 
   def set_tire

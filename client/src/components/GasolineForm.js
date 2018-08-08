@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Container } from 'semantic-ui-react';
+import { Form, Button } from 'semantic-ui-react';
 
 class GasolineForm extends React.Component {
   state = {

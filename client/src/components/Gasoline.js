@@ -1,11 +1,11 @@
 import React from 'react';
-import { Form, Header, Button, Divider, Container, Segment, Table, Card } from 'semantic-ui-react';
+import { Header, Button, Divider, Container, Table } from 'semantic-ui-react';
 import axios from 'axios';
 import GasolineForm from './GasolineForm';
 
 
 class Gasoline extends React.Component{
-  state = { showForm: false, gasolines: [] }
+  state = { showForm: false, gasolines: [], edit: false }
 
   componentDidMount = () => {
     axios.get('api/gasolines')
@@ -18,6 +18,24 @@ class Gasoline extends React.Component{
    });
  }
 
+ toggleEdit = () => {
+    this.setState( state => {
+      return { edit: !state.edit }
+    })
+  }
+
+  // edit = () => {
+  //   const { gasoline } = this.state
+  //   return <GasolineForm submit={this.submit} {...gasoline} />
+  // }
+
+  delete = () => {
+    const { gasoline } = this.state
+    debugger
+    axios.delete('/api/gasolines')
+    .then( res => this.setState({...gasoline}))
+  }
+
  showForm = () => {
     return <GasolineForm submit={this.submit} />
   }
@@ -29,7 +47,7 @@ show = () => {
    <Table celled style={{fontFamily: 'Ubuntu', fontSize:'16px'}}>
      <Table.Header>
        <Table.Row>
-         <Table.HeaderCell children>Location</Table.HeaderCell>
+         <Table.HeaderCell>Location</Table.HeaderCell>
          <Table.HeaderCell>Octane</Table.HeaderCell>
          <Table.HeaderCell>Gallons</Table.HeaderCell>
          <Table.HeaderCell>Miles</Table.HeaderCell>
@@ -38,12 +56,13 @@ show = () => {
          <Table.HeaderCell>Date</Table.HeaderCell>
          <Table.HeaderCell>Miles Between</Table.HeaderCell>
          <Table.HeaderCell>Notes</Table.HeaderCell>
+         <Table.HeaderCell>Edit/Delete</Table.HeaderCell>
        </Table.Row>
      </Table.Header>
-     { gasolines.map( g =>
+     { gasolines.map( (g, i) =>
      <Table.Body >
        <Table.Row>
-           <Table.Cell key={g.id}>{g.location}</Table.Cell>
+           <Table.Cell key={g.id}>{g.location} </Table.Cell>
            <Table.Cell key={g.id}>{g.octane}</Table.Cell>
            <Table.Cell key={g.id}>{g.gallons}</Table.Cell>
            <Table.Cell key={g.id}>{g.miles}</Table.Cell>
@@ -52,6 +71,10 @@ show = () => {
            <Table.Cell key={g.id}>{g.date}</Table.Cell>
            <Table.Cell key={g.id}>{g.miles_between}</Table.Cell>
            <Table.Cell key={g.id}>{g.notes}</Table.Cell>
+           <Table.Cell>
+             <Button circular icon="edit" size="small" onClick={this.edit}/>
+             <Button circular icon="delete" color="red" size="small" onCLick={this.delete}/>
+           </Table.Cell>
        </Table.Row>
      </Table.Body>
    )}

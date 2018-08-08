@@ -27,20 +27,29 @@ class Mods extends React.Component{
              <Table.HeaderCell>Price</Table.HeaderCell>
              <Table.HeaderCell>Miles</Table.HeaderCell>
              <Table.HeaderCell>Notes</Table.HeaderCell>
+             <Table.HeaderCell>Edit/Delete</Table.HeaderCell>
            </Table.Row>
          </Table.Header>
+         { mods.map( (m, i) =>
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell key={m.id}>{m.name}</Table.Cell>
+              <Table.Cell key={m.id}>{m.date}</Table.Cell>
+              <Table.Cell key={m.id}>$ {m.price}</Table.Cell>
+              <Table.Cell key={m.id}>{m.miles}</Table.Cell>
+              <Table.Cell key={m.id}>{m.notes}</Table.Cell>
+              <Table.Cell>
+                <Button circular icon="edit" size="small" onClick={this.edit}/>
+                <Button circular icon="delete" color="red" size="small"/>
+              </Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        )}
        </Table>
-       <ul>
-         { mods.map( m =>
-             <li key={m.id}>
-               <h1>{m.name}</h1>
-             </li>
-           )
-         }
-       </ul>
      </div>
    )
  }
+
  form = () => {
     return <ModsForm submit={this.submit} />
   }
