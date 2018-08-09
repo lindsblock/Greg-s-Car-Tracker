@@ -1,5 +1,5 @@
 class Api::GasolinesController < ApplicationController
-  before_action :set_gasoline, only: [:update, :destroy]
+  before_action :set_gasoline, only: [:update, :destroy, :show]
 
   def index
     render json: Gasoline.all.order(created_at: :asc)
@@ -33,7 +33,7 @@ class Api::GasolinesController < ApplicationController
   private
 
   def gasoline_params
-    params.require(:gasoline).permit(:location, :octane, :gallons, :miles, :mpg, :price, :date, :miles_between, :notes)
+    params.require(:gasoline).permit(:location, :octane, :gallons, :miles, :mpg, :price, :date, :miles_between, :notes, :id)
   end
 
   def set_gasoline

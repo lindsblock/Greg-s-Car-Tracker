@@ -28,7 +28,7 @@ class ModsForm extends React.Component {
     const { name, value } = e.target;
     this.setState({ [name]: value })
   }
-
+  
   render() {
     const { name, date, price, miles, notes} = this.state
     return(

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header, Button, Divider, Container, Table } from 'semantic-ui-react';
-import axios from 'axios';
 import GasolineForm from './GasolineForm';
+import axios from 'axios';
 
 
 class Gasoline extends React.Component{
@@ -12,16 +12,8 @@ class Gasoline extends React.Component{
     .then(res => this.setState({ gasolines: res.data }) )
   }
 
-  toggleForm = () => {
-   this.setState( state => {
-     return { showForm: !state.showForm }
-   });
- }
-
- toggleEdit = () => {
-    this.setState( state => {
-      return { edit: !state.edit }
-    })
+  showForm = () => {
+    return <GasolineForm submit={this.submit} />
   }
 
   // edit = () => {
@@ -29,74 +21,71 @@ class Gasoline extends React.Component{
   //   return <GasolineForm submit={this.submit} {...gasoline} />
   // }
 
-  delete = () => {
-    const { gasoline } = this.state
-    debugger
-    axios.delete('/api/gasolines')
-    .then( res => this.setState({...gasoline}))
+  deleteGasoline = (id) => {
+    axios.delete(`/api/gasolines/${id}`)
+    let gasoline={...this.state}
+    this.setState({...gasoline})
   }
 
- showForm = () => {
-    return <GasolineForm submit={this.submit} />
+  toggleForm = () => {
+    this.setState( state => {
+      return { showForm: !state.showForm }
+    })
   }
 
-show = () => {
- const { gasolines } = this.state
- return (
-   <div>
-   <Table celled style={{fontFamily: 'Ubuntu', fontSize:'16px'}}>
-     <Table.Header>
-       <Table.Row>
-         <Table.HeaderCell>Location</Table.HeaderCell>
-         <Table.HeaderCell>Octane</Table.HeaderCell>
-         <Table.HeaderCell>Gallons</Table.HeaderCell>
-         <Table.HeaderCell>Miles</Table.HeaderCell>
-         <Table.HeaderCell>MPG</Table.HeaderCell>
-         <Table.HeaderCell>Price</Table.HeaderCell>
-         <Table.HeaderCell>Date</Table.HeaderCell>
-         <Table.HeaderCell>Miles Between</Table.HeaderCell>
-         <Table.HeaderCell>Notes</Table.HeaderCell>
-         <Table.HeaderCell>Edit/Delete</Table.HeaderCell>
-       </Table.Row>
-     </Table.Header>
-     { gasolines.map( (g, i) =>
-     <Table.Body >
-       <Table.Row>
-           <Table.Cell key={g.id}>{g.location} </Table.Cell>
-           <Table.Cell key={g.id}>{g.octane}</Table.Cell>
-           <Table.Cell key={g.id}>{g.gallons}</Table.Cell>
-           <Table.Cell key={g.id}>{g.miles}</Table.Cell>
-           <Table.Cell key={g.id}>{g.mpg}</Table.Cell>
-           <Table.Cell key={g.id}>{g.price}</Table.Cell>
-           <Table.Cell key={g.id}>{g.date}</Table.Cell>
-           <Table.Cell key={g.id}>{g.miles_between}</Table.Cell>
-           <Table.Cell key={g.id}>{g.notes}</Table.Cell>
-           <Table.Cell>
-             <Button circular icon="edit" size="small" onClick={this.edit}/>
-             <Button circular icon="delete" color="red" size="small" onCLick={this.delete}/>
-           </Table.Cell>
-       </Table.Row>
-     </Table.Body>
-   )}
-   </Table>
-   <Divider hidden />
- </div>
- )
-}
-
-form = () => {
-   return <GasolineForm submit={this.submit} />
- }
-
- submit = (gasoline) => {
-   const { gasolines } = this.state
-   axios.post('/api/gasolines', { gasoline })
-     .then( res => {
-       this.setState({
-         gasolines: [res.data, ...gasolines],
-         showForm: false
+   submit = (gasoline) => {
+     const { gasolines } = this.state
+     axios.post('/api/gasolines', { gasoline })
+       .then( res => {
+         this.setState({
+           gasolines: [...gasolines, res.data],
+           showForm: false
+         })
        })
-     })
+   }
+
+  showGasolines = () => {
+   const { gasolines } = this.state
+   return (
+     <div>
+     <Table celled style={{fontFamily: 'Ubuntu', fontSize:'16px'}}>
+       <Table.Header>
+         <Table.Row>
+           <Table.HeaderCell>Location</Table.HeaderCell>
+           <Table.HeaderCell>Octane</Table.HeaderCell>
+           <Table.HeaderCell>Gallons</Table.HeaderCell>
+           <Table.HeaderCell>Miles</Table.HeaderCell>
+           <Table.HeaderCell>MPG</Table.HeaderCell>
+           <Table.HeaderCell>Price</Table.HeaderCell>
+           <Table.HeaderCell>Date</Table.HeaderCell>
+           <Table.HeaderCell>Miles Between</Table.HeaderCell>
+           <Table.HeaderCell>Notes</Table.HeaderCell>
+           <Table.HeaderCell>Edit/Delete</Table.HeaderCell>
+         </Table.Row>
+       </Table.Header>
+       { gasolines.map( (g, i) =>
+       <Table.Body >
+         <Table.Row>
+             <Table.Cell key={g.id}>{g.location} </Table.Cell>
+             <Table.Cell key={g.id}>{g.octane}</Table.Cell>
+             <Table.Cell key={g.id}>{g.gallons}</Table.Cell>
+             <Table.Cell key={g.id}>{g.miles}</Table.Cell>
+             <Table.Cell key={g.id}>{g.mpg}</Table.Cell>
+             <Table.Cell key={g.id}>{g.price}</Table.Cell>
+             <Table.Cell key={g.id}>{g.date}</Table.Cell>
+             <Table.Cell key={g.id}>{g.miles_between}</Table.Cell>
+             <Table.Cell key={g.id}>{g.notes}</Table.Cell>
+             <Table.Cell>
+               <Button circular icon="edit" size="small" onClick={this.edit} />
+               <Button circular icon="delete" color="red" size="small" onCLick={this.deleteGasoline} />
+             </Table.Cell>
+         </Table.Row>
+       </Table.Body>
+     )}
+     </Table>
+     <Divider hidden />
+   </div>
+   )
  }
 
   render() {
@@ -109,10 +98,10 @@ form = () => {
            { showForm ? 'Cancel' : 'Add Gasoline' }
          </Button>
          <Divider hidden />
-         { showForm ? this.form() : this.show() }
+         { showForm ? this.showForm() : this.showGasolines() }
         </Container>
       </div>
-    );
+    )
   }
 }
 

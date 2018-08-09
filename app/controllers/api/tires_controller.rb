@@ -1,5 +1,5 @@
 class Api::TiresController < ApplicationController
-  before_action :set_tire, only: [:update, :destroy]
+  before_action :set_tire, only: [:update, :destroy, :show]
 
   def index
     render json: Tire.all.order(created_at: :asc)

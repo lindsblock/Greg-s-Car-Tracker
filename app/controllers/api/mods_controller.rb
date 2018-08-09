@@ -1,5 +1,5 @@
 class Api::ModsController < ApplicationController
-  before_action :set_mod, only: [:update, :destroy]
+  before_action :set_mod, only: [:update, :destroy, :show]
 
   def index
     render json: Mod.all.order(created_at: :asc)
@@ -33,7 +33,7 @@ class Api::ModsController < ApplicationController
   private
 
   def mod_params
-    params.require(:mod).permit(:name, :date, :price, :miles, :notes)
+    params.require(:mod).permit(:name, :date, :price, :miles, :notes, :id)
   end
 
   def set_mod

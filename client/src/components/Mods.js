@@ -15,15 +15,35 @@ class Mods extends React.Component{
     return <ModsForm submit={this.submit} />
   }
 
-    handleDelete= (e, id) => {
-    e.preventDefault();
+  // editMod = ( ) => {
+  //   const { mod } = this.setState
+  //   return <ModsForm submit={this.submit} {...mod} />
+  // }
+
+  deleteMod = (id) => {
     axios.delete(`/api/mods/${id}`)
     let mod = { ...this.state }
     this.setState({ mod })
   }
 
+   toggleForm = () => {
+     this.setState( state => {
+       return { showForm: !state.showForm }
+     })
+   }
 
-  show = () => {
+   submit = (mod) => {
+     const { mods } = this.state
+     axios.post('/api/mods', { mod })
+       .then( res => {
+         this.setState({
+           mods: [...mods, res.data ],
+           showForm: false
+         })
+       })
+   }
+
+  showMods = () => {
    const { mods } = this.state
    return (
      <div>
@@ -47,8 +67,8 @@ class Mods extends React.Component{
               <Table.Cell key={m.id}>{m.miles}</Table.Cell>
               <Table.Cell key={m.id}>{m.notes}</Table.Cell>
               <Table.Cell>
-                <Button circular icon="edit" size="small" onClick={this.edit}/>
-                <Button circular icon="delete" color="red" size="small" onClick={this.handleDelete}/>
+                <Button circular icon="edit" size="small" onClick={this.editMod}/>
+                <Button circular icon="delete" color="red" size="small" onClick={this.deleteMod}/>
               </Table.Cell>
             </Table.Row>
           </Table.Body>
@@ -57,26 +77,6 @@ class Mods extends React.Component{
      </div>
    )
  }
-
- form = () => {
-    return <ModsForm submit={this.submit} />
-  }
-  toggleForm = () => {
-    this.setState( state => {
-      return { showForm: !state.showForm }
-    })
-  }
-
-  submit = (mod) => {
-    const { mods } = this.state
-    axios.post('/api/mods', { mod })
-      .then( res => {
-        this.setState({
-          mods: [res.data, ...mods],
-          showForm: false
-        })
-      })
-  }
 
   render() {
     const { showForm } = this.state
@@ -88,7 +88,7 @@ class Mods extends React.Component{
            { showForm ? 'Cancel' : 'Add Modification' }
          </Button>
          <Divider hidden />
-         { showForm ? this.form() : this.show() }
+         { showForm ? this.showForm() : this.showMods() }
        </Container>
       </div>
     )
