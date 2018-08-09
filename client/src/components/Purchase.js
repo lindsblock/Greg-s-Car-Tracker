@@ -74,7 +74,7 @@ class Purchase extends React.Component{
               <Table.Cell>6MT</Table.Cell>
               <Table.Cell>Lightning Red</Table.Cell>
               <Table.Cell>Black</Table.Cell>
-              <Table.Cell>JF1VA1A64F9819101</Table.Cell>
+              <Table.Cell>XXXX</Table.Cell>
             </Table.Row>
           </Table.Body>
         </Table>
@@ -154,7 +154,7 @@ class Purchase extends React.Component{
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Bank</Table.HeaderCell>
-              <Table.Cell>Cyprus Credit Union</Table.Cell>
+              <Table.Cell>XXXX</Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.HeaderCell>Amount Financed</Table.HeaderCell>

@@ -15,6 +15,14 @@ class Mods extends React.Component{
     return <ModsForm submit={this.submit} />
   }
 
+    handleDelete= (e, id) => {
+    e.preventDefault();
+    axios.delete(`/api/mods/${id}`)
+    let mod = { ...this.state }
+    this.setState({ mod })
+  }
+
+
   show = () => {
    const { mods } = this.state
    return (
@@ -40,7 +48,7 @@ class Mods extends React.Component{
               <Table.Cell key={m.id}>{m.notes}</Table.Cell>
               <Table.Cell>
                 <Button circular icon="edit" size="small" onClick={this.edit}/>
-                <Button circular icon="delete" color="red" size="small"/>
+                <Button circular icon="delete" color="red" size="small" onClick={this.handleDelete}/>
               </Table.Cell>
             </Table.Row>
           </Table.Body>
