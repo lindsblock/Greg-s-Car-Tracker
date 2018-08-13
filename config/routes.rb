@@ -3,6 +3,12 @@ Rails.application.routes.draw do
   namespace :api do
     resources :tire_rotations
   end
+  namespace :api do
+    resources :filters
+  end
+  namespace :api do
+    resources :services
+  end
 
   namespace :api do
     resources :gasolines

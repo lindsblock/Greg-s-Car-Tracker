@@ -4,7 +4,7 @@ import ModsForm from './ModsForm';
 import axios from 'axios';
 
 class Mods extends React.Component{
-  state = { showForm: false, mods: [] }
+  state = { showForm: false, mods: [], edit: false }
 
   componentDidMount = () => {
     axios.get('api/mods')
@@ -15,10 +15,10 @@ class Mods extends React.Component{
     return <ModsForm submit={this.submit} />
   }
 
-  // editMod = ( ) => {
-  //   const { mod } = this.setState
-  //   return <ModsForm submit={this.submit} {...mod} />
-  // }
+  editMod = () => {
+    const { mod } = this.State
+    return <ModsForm submit={this.submit} {...mod} />
+  }
 
   deleteMod = (id) => {
     axios.delete(`/api/mods/${id}`)

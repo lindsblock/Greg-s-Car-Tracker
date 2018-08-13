@@ -45,7 +45,7 @@ class Gasoline extends React.Component{
    }
 
   showGasolines = () => {
-   const { gasolines } = this.state
+   const { gasolines} = this.state
    return (
      <div>
      <Table celled style={{fontFamily: 'Ubuntu', fontSize:'16px'}}>
@@ -77,7 +77,7 @@ class Gasoline extends React.Component{
              <Table.Cell key={g.id}>{g.notes}</Table.Cell>
              <Table.Cell>
                <Button circular icon="edit" size="small" onClick={this.edit} />
-               <Button circular icon="delete" color="red" size="small" onCLick={this.deleteGasoline} />
+               <Button circular icon="delete" color="red" size="small" onClick={this.deleteGasoline} />
              </Table.Cell>
          </Table.Row>
        </Table.Body>
