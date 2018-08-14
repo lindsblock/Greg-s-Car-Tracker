@@ -16,7 +16,7 @@ class Mods extends React.Component{
   }
 
   editMod = () => {
-    const { mod } = this.State
+    const { mod } = this.state
     return <ModsForm submit={this.submit} {...mod} />
   }
 
